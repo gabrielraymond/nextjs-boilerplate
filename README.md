@@ -1,3 +1,36 @@
+src/
+│
+├── app/                                # Next.js 14 App Router
+│   ├── (main)/                         # Main app routes
+│   │   ├── page.tsx                    # Home page
+│   │   └── pokemon/                    # Pokemon details page
+│   │       └── [id]/page.tsx
+│   ├── layout.tsx                      # Root layout
+│   └── providers.tsx                   # Global providers
+│
+├── components/                         # Reusable UI components
+│   ├── common/                         # Common components (e.g., buttons, inputs)
+│   └── features/                       # Feature-specific components
+│       ├── PokemonList.tsx             # Pokemon list component
+│       └── PokemonDetails.tsx          # Pokemon details component
+│
+├── hooks/                              # Custom React hooks
+│   ├── usePokemon.ts                   # Hook for fetching Pokemon list
+│   └── usePokemonDetails.ts            # Hook for fetching Pokemon details
+│
+├── lib/                                # Utility functions and libraries
+│   ├── api/                            # API client and services
+│   │   ├── client.ts                   # Axios client
+│   │   └── pokemonService.ts           # Pokemon-related API calls
+│   └── constants/                      # Constants (e.g., API endpoints)
+│
+├── stores/                             # Zustand stores
+│   └── useUIStore.ts                   # UI-related state (e.g., theme, modals)
+│
+└── types/                              # TypeScript types
+    ├── api/                            # API response/request types
+    └── pokemon.ts                      # Pokemon-related types
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
