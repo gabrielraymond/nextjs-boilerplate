@@ -9,6 +9,7 @@ export default {
     "./src/providers/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/stores/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/types/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {

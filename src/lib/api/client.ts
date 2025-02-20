@@ -1,10 +1,21 @@
 import axios from 'axios'
 
-const POKEAPI_BASE_URL = `https://pokeapi.co/api/v2`;
+const BASE_URLS = {
+    POKEAPI: process.env.NEXT_PUBLIC_POKEAPI_BASE_URL || '',
+    JSONPLACEHOLDER: process.env.NEXT_PUBLIC_JSON_PLACEHOLDER_BASE_URL || '',
+}; 
 
-export const axiosClient = axios.create({
-    baseURL: POKEAPI_BASE_URL,
-    headers: {
-        'Content_Type': 'application/json'
-    }
-})
+// Function to create an Axios instance dynamically
+export const createAxiosClient = (apiName: keyof typeof BASE_URLS) => {
+    return axios.create({
+        baseURL: BASE_URLS[apiName],
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+};
+
+// Create Instances
+export const pokeApiClient = createAxiosClient('POKEAPI');
+export const jsonPlaceholderApiClient = createAxiosClient('JSONPLACEHOLDER')
+

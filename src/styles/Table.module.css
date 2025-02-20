@@ -1,0 +1,41 @@
+.tableContainer {
+  overflow-x: auto;
+  height: 100%;
+}
+
+.table {
+  min-width: 100%;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+}
+
+.th {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sticky {
+  position: sticky;
+  z-index: 1;
+  background-color: white; /* Match the background color */
+}
+
+.stickyLeft {
+  left: 0;
+}
+
+.stickyRight {
+  right: 0;
+}

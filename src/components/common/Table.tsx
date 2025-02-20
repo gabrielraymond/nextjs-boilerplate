@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import styles from '@/styles/Table.module.css'; // Import the CSS Module
 
-// Define a generic type for the data
 type DataType = Record<string, any>;
 
 interface Column<T extends DataType> {
-  key: keyof T; // Ensure the key is a valid key of the data type
+  key: keyof T;
   label: string;
   sortable?: boolean;
-  render?: (value: T[keyof T], row: T, index:number) => React.ReactNode; // Allow custom rendering with access to the entire row
+  render?: (value: T[keyof T], row: T, index: number) => React.ReactNode;
+  sticky?: 'left' | 'right';
 }
 
 interface TableProps<T extends DataType> {
@@ -48,14 +49,16 @@ const Table = <T extends DataType>({ data, columns, defaultSort }: TableProps<T>
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200">
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
         <thead>
           <tr>
             {columns.map((column) => (
               <th
                 key={column.key as string}
-                className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className={`${styles.th} ${
+                  column.sticky ? `${styles.sticky} ${column.sticky === 'left' ? styles.stickyLeft : styles.stickyRight}` : ''
+                }`}
                 onClick={() => column.sortable && requestSort(column.key)}
               >
                 <div className="flex items-center">
@@ -80,9 +83,14 @@ const Table = <T extends DataType>({ data, columns, defaultSort }: TableProps<T>
           {sortedData.map((row, rowIndex) => (
             <tr key={rowIndex} className="hover:bg-gray-50">
               {columns.map((column) => (
-                <td key={column.key as string} className="px-6 py-4 border-b border-gray-200">
+                <td
+                  key={column.key as string}
+                  className={`${styles.td} ${
+                    column.sticky ? `${styles.sticky} ${column.sticky === 'left' ? styles.stickyLeft : styles.stickyRight}` : ''
+                  }`}
+                >
                   {column.render
-                    ? column.render(row[column.key], row, rowIndex) // Pass the entire row to the render function
+                    ? column.render(row[column.key], row, rowIndex)
                     : row[column.key]}
                 </td>
               ))}

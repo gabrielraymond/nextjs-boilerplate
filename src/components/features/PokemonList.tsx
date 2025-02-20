@@ -3,6 +3,7 @@ import { usePokemonList } from "@/hooks/usePokemon";
 import Link from "next/link";
 import Table from "../common/Table";
 import { Pokemon } from "@/types/api/pokemon";
+import { useUserList } from "@/hooks/useUsers";
 
 // interface Data {
 //   id: number;
@@ -24,6 +25,12 @@ export const PokemonList = () => {
     error,
   }: { data: any; isLoading: boolean; error: any } = usePokemonList();
 
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    error: userError,
+  }: { data: any; isLoading: boolean; error: any } = useUserList();
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -39,6 +46,7 @@ export const PokemonList = () => {
       key: "action",
       label: "Action",
       sortable: true,
+      sticky: "right",
       render: (_: any, row: Pokemon, idx: any) => (
         <Link
           href={`/pokemon/${row.name}`}
@@ -51,7 +59,7 @@ export const PokemonList = () => {
   ];
 
   return (
-    <div>
+    <div className="h-[200vh]">
       <h1>Pokemon List</h1>
       {/* <ul>
         {data?.results.map((pokemon) => (
@@ -60,13 +68,14 @@ export const PokemonList = () => {
           </li>
         ))}
       </ul> */}
-
       <h1 className="text-2xl font-bold mb-4">User Table</h1>
-      <Table<Pokemon>
-        data={data?.results}
-        columns={columns}
-        defaultSort={{ key: "name", direction: "asc" }}
-      />
+      <div className="h-[500px] w-[400px]">
+        <Table
+          data={data?.results}
+          columns={columns}
+          defaultSort={{ key: "name", direction: "asc" }}
+        />
+      </div>
     </div>
   );
 };
